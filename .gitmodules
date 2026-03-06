@@ -1,7 +1,3 @@
-[submodule "users/hbm"]
-	path = users/hbm
-	url = git@github.com:hbmorrison/qmk_users_hbm.git
-	branch = develop
 [submodule "modules/hbm"]
 	path = modules/hbm
 	url = git@github.com:hbmorrison/qmk_modules.git
