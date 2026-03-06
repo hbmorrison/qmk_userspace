@@ -1,0 +1,8 @@
+{
+    "modules": [
+        "hbm/alt_tab",
+        "hbm/conditional_layers",
+        "hbm/custom_keys",
+        "hbm/dynamic_mods"
+    ]
+}
