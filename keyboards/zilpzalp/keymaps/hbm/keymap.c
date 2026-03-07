@@ -1,23 +1,75 @@
 #include QMK_KEYBOARD_H
 
-#include "conditional_layers.h"
+// Module headers.
 
-#include "keymap.h"
+#include "conditional_layers.h"
+#include "custom_keys.h"
+
+// Define layers.
+
+enum {
+  LAYER_BS,
+  LAYER_BS_LX,
+  LAYER_BS_RX,
+  LAYER_SM_L,
+  LAYER_SM_LX,
+  LAYER_SM_R,
+  LAYER_SM_RX,
+  LAYER_NM_L,
+  LAYER_NM_LX,
+  LAYER_NV_R,
+  LAYER_NV_RX,
+  LAYER_FN_L,
+  LAYER_FN_LX,
+  LAYER_CT_R,
+  LAYER_MD_L,
+  LAYER_MD_R
+};
+
+// Layer keycodes for primary layers.
+
+#define LT_RS LT(LAYER_SM_R,  KC_R)
+#define LT_RN LT(LAYER_NV_R,  KC_S)
+#define LT_RX LT(LAYER_BS_RX, KC_T)
+#define LT_LX LT(LAYER_BS_LX, KC_N)
+#define LT_LN LT(LAYER_NM_L,  KC_E)
+#define LT_LS LT(LAYER_SM_L,  KC_I)
+#define LT_LM LT(LAYER_MD_L, KC_SPC)
+#define LT_RM LT(LAYER_MD_R, KC_ENT)
 
 // Layer masks for conditional layers.
 
 #define MASK_NM_LX (LAYER_BIT(LAYER_NM_L) | LAYER_BIT(LAYER_BS_LX))
+#define MASK_NV_RX (LAYER_BIT(LAYER_NV_R) | LAYER_BIT(LAYER_BS_RX))
 #define MASK_SM_LX (LAYER_BIT(LAYER_SM_L) | LAYER_BIT(LAYER_BS_LX))
-
+#define MASK_SM_RX (LAYER_BIT(LAYER_SM_R) | LAYER_BIT(LAYER_BS_RX))
 #define MASK_FN_L  (LAYER_BIT(LAYER_SM_L) | LAYER_BIT(LAYER_NM_L))
 #define MASK_FN_LX (LAYER_BIT(LAYER_SM_L) | LAYER_BIT(LAYER_NM_L) | LAYER_BIT(LAYER_BS_LX))
-
-#define MASK_NV_RX (LAYER_BIT(LAYER_NV_R) | LAYER_BIT(LAYER_BS_RX))
-#define MASK_SM_RX (LAYER_BIT(LAYER_SM_R) | LAYER_BIT(LAYER_BS_RX))
-
 #define MASK_CT_R  (LAYER_BIT(LAYER_SM_R) | LAYER_BIT(LAYER_NV_R))
 
-// Define the base keymap for zilpzalp.
+// Add conditional layers.
+
+void add_conditional_layers() {
+
+  // Add the extended number layer, extended nav layer and both extended symbol
+  // layers as conditional layers.
+
+  set_conditional_layer_mask(LAYER_NM_LX, MASK_NM_LX);
+  set_conditional_layer_mask(LAYER_NV_RX, MASK_NV_RX);
+  set_conditional_layer_mask(LAYER_SM_LX, MASK_SM_LX);
+  set_conditional_layer_mask(LAYER_SM_RX, MASK_SM_RX);
+
+  // Add the function layer and its extended layer as conditional layers.
+
+  set_conditional_layer_mask(LAYER_FN_L,  MASK_FN_L);
+  set_conditional_layer_mask(LAYER_FN_LX, MASK_FN_LX);
+
+  // Add the controls layer as a conditional layer.
+
+  set_conditional_layer_mask(LAYER_CT_R,  MASK_CT_R);
+};
+
+// Keymap.
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BS] = LAYOUT(
@@ -116,26 +168,4 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            A_CX,    A_CC,    A_CV,                      KC_NO,   KC_NO,   KC_NO,
                              KC_TRNS, CW_TOGG, KC_TRNS, KC_TRNS
   )
-};
-
-// Add conditional layers.
-
-void add_conditional_layers() {
-
-  // Add the extended number layer, extended nav layer and both extended symbol
-  // layers as conditional layers.
-
-  set_conditional_layer_mask(LAYER_NM_LX, MASK_NM_LX);
-  set_conditional_layer_mask(LAYER_NV_RX, MASK_NV_RX);
-  set_conditional_layer_mask(LAYER_SM_LX, MASK_SM_LX);
-  set_conditional_layer_mask(LAYER_SM_RX, MASK_SM_RX);
-
-  // Add the function layer and its extended layer as conditional layers.
-
-  set_conditional_layer_mask(LAYER_FN_L,  MASK_FN_L);
-  set_conditional_layer_mask(LAYER_FN_LX, MASK_FN_LX);
-
-  // Add the controls layer as a conditional layer.
-
-  set_conditional_layer_mask(LAYER_CT_R,  MASK_CT_R);
 };
