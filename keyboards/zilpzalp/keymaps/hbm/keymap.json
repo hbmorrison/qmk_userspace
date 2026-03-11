@@ -1,8 +1,9 @@
 {
     "modules": [
-        "hbm/alt_tab",
         "hbm/conditional_layers",
+        "hbm/core_keymap",
         "hbm/custom_keys",
-        "hbm/dynamic_mods"
+        "hbm/sticky_oneshot_mods",
+        "hbm/windows_shortcuts"
     ]
 }
