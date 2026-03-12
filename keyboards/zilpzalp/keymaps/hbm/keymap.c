@@ -91,5 +91,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     CORE_FILL_OML, CORE_FILL_ML,  CORE_CTLS_IM, CORE_CTLS_MR, CORE_CTLS_OMR,
     /**/           CORE_FILL_BL,  /**/          CORE_CTLS_BR,
     /**/           CORE_FILL_THL, CORE_FILL_TH, CORE_FILL_THR
+  ),
+  [LAYER_LMOD] = LAYOUT_zilpzalp(
+    /**/           CORE_MOD_TL,   CORE_LMOD_IT, CORE_TRNS_TR,
+    CORE_FILL_OML, CORE_MOD_ML,   CORE_LMOD_IM, CORE_TRNS_MR, CORE_TRNS_OMR,
+    /**/           CORE_MOD_BL,   /**/          CORE_TRNS_BR,
+    /**/           CORE_FILL_THL, CORE_FILL_TH, CORE_FILL_THR
+  ),
+  [LAYER_RMOD] = LAYOUT_zilpzalp(
+    /**/           CORE_TRNS_TL,  CORE_RMOD_IT, CORE_MOD_TR,
+    CORE_TRNS_OML, CORE_TRNS_ML,  CORE_RMOD_IM, CORE_MOD_MR,  CORE_FILL_OMR,
+    /**/           CORE_TRNS_BL,  /**/          CORE_MOD_BR,
+    /**/           CORE_FILL_THL, CORE_FILL_TH, CORE_FILL_THR
   )
 };
