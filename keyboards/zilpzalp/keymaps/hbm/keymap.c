@@ -1,9 +1,8 @@
-#include QMK_KEYBOARD_H
-
 // Module headers.
 
 #include "core_keymap.h"
 #include "custom_keys.h"
+#include "handed_mods.h"
 
 // Tell the handed mods module to ignore thumb keys.
 
@@ -11,13 +10,16 @@ bool handed_mods_is_ignored_key(uint16_t keycode) {
   switch (keycode) {
     case LT_NUM:
     case LT_NAV:
+    case LT_LEXT:
+    case LT_REXT:
       return true;
   }
   return false;
 }
 
 // Tell the handed mods module which side of the keyboard the given key position
-// is on.
+// is on. On the zilpzalp keyboard, keys on the left side are on even rows on
+// the matrix, and keys on the right side are on odd rows on the matrix.
 
 bool handed_mods_is_left_key(keypos_t key) {
   return key.row % 2 == 0;
@@ -27,10 +29,10 @@ bool handed_mods_is_left_key(keypos_t key) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT_zilpzalp(
-    /**/           CORE_BASE_TL,  CORE_BASE_IT, CORE_BASE_TR,
-    CORE_BASE_OML, CORE_BASE_ML,  CORE_BASE_IM, CORE_BASE_MR, CORE_BASE_OMR,
-    /**/           CORE_BASE_BL,  /**/          CORE_BASE_BR,
-    /**/           CORE_BASE_THL, CORE_BASE_TH, CORE_BASE_THR
+    /**/           CORE_BASE_TL,   CORE_BASE_IT, CORE_BASE_TR,
+    CORE_BASE_OML, HANDED_BASE_ML, CORE_BASE_IM, HANDED_BASE_MR, CORE_BASE_OMR,
+    /**/           CORE_BASE_BL,   /**/          CORE_BASE_BR,
+    /**/           CORE_BASE_THL,  CORE_BASE_TH, CORE_BASE_THR
   ),
   [LAYER_LEXT] = LAYOUT_zilpzalp(
     /**/           CORE_EXT_TL,  CORE_FILL_IT, CORE_FILL_TR,
@@ -110,21 +112,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /**/           CORE_FILL_BL,  /**/          CORE_CTLS_BR,
     /**/           CORE_FILL_THL, CORE_FILL_TH, CORE_FILL_THR
   ),
-
-  // Use custom keys defined in the handed mods module. These do not appear in
-  // the core_keymaps module so the layer keycodes have to be written out long
-  // hand.
-
   [LAYER_LMOD] = LAYOUT_zilpzalp(
-    /**/   KC_NO,   KC_NO,  KC_NO,   KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_NO, KC_TRNS, HM_SFT, HM_CTL,  KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    /**/   KC_NO,   HM_GUI, HM_ALT,  /**/     /**/     KC_TRNS, KC_TRNS, KC_TRNS,
-    /**/   /**/     /**/    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    /**/           CORE_TRNS_TL,  CORE_TRNS_ITR, HANDED_MOD_TR,
+    CORE_TRNS_OML, CORE_TRNS_ML,  CORE_TRNS_IMR, HANDED_MOD_MR, HANDED_MOD_OMR,
+    /**/           CORE_TRNS_BL,  /**/           HANDED_MOD_BR,
+    /**/           CORE_FILL_THL, CORE_FILL_TH,  CORE_FILL_THR
   ),
   [LAYER_RMOD] = LAYOUT_zilpzalp(
-    /**/     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,   KC_NO,  KC_NO,  KC_NO,
-    KC_TRNS, KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,   HM_CTL, HM_SFT, KC_TRNS, KC_NO,
-    /**/     KC_TRNS, KC_TRNS, KC_TRNS, /**/     /**/     HM_ALT, HM_GUI, KC_NO,
-    /**/     /**/     /**/     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    /**/            HANDED_MOD_TL, CORE_TRNS_ITL, CORE_TRNS_TR,
+    HANDED_MOD_OML, HANDED_MOD_ML, CORE_TRNS_IML, CORE_TRNS_MR, CORE_TRNS_OMR,
+    /**/            HANDED_MOD_BL, /**/           CORE_TRNS_BR,
+    /**/            CORE_FILL_THL, CORE_FILL_TH,  CORE_FILL_THR
   )
 };
