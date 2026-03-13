@@ -3,7 +3,7 @@
         "hbm/conditional_layers",
         "hbm/core_keymap",
         "hbm/custom_keys",
-        "hbm/sticky_oneshot_mods",
+        "hbm/handed_mods",
         "hbm/windows_shortcuts"
     ]
 }

@@ -5,7 +5,25 @@
 #include "core_keymap.h"
 #include "custom_keys.h"
 
-// Keymap.
+// Tell the handed mods module to ignore thumb keys.
+
+bool handed_mods_is_ignored_key(uint16_t keycode) {
+  switch (keycode) {
+    case LT_NUM:
+    case LT_NAV:
+      return true;
+  }
+  return false;
+}
+
+// Tell the handed mods module which side of the keyboard the given key position
+// is on.
+
+bool handed_mods_is_left_key(keypos_t key) {
+  return key.row % 2 == 0;
+}
+
+// Define the keymap.
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT_zilpzalp(
@@ -92,16 +110,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /**/           CORE_FILL_BL,  /**/          CORE_CTLS_BR,
     /**/           CORE_FILL_THL, CORE_FILL_TH, CORE_FILL_THR
   ),
+
+  // Use custom keys defined in the handed mods module. These do not appear in
+  // the core_keymaps module so the layer keycodes have to be written out long
+  // hand.
+
   [LAYER_LMOD] = LAYOUT_zilpzalp(
-    /**/           CORE_MOD_TL,   CORE_LMOD_IT, CORE_TRNS_TR,
-    CORE_FILL_OML, CORE_MOD_ML,   CORE_LMOD_IM, CORE_TRNS_MR, CORE_TRNS_OMR,
-    /**/           CORE_MOD_BL,   /**/          CORE_TRNS_BR,
-    /**/           CORE_FILL_THL, CORE_FILL_TH, CORE_FILL_THR
+    /**/   KC_NO,   KC_NO,  KC_NO,   KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_NO, KC_TRNS, HM_SFT, HM_CTL,  KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    /**/   KC_NO,   HM_GUI, HM_ALT,  /**/     /**/     KC_TRNS, KC_TRNS, KC_TRNS,
+    /**/   /**/     /**/    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   ),
   [LAYER_RMOD] = LAYOUT_zilpzalp(
-    /**/           CORE_TRNS_TL,  CORE_RMOD_IT, CORE_MOD_TR,
-    CORE_TRNS_OML, CORE_TRNS_ML,  CORE_RMOD_IM, CORE_MOD_MR,  CORE_FILL_OMR,
-    /**/           CORE_TRNS_BL,  /**/          CORE_MOD_BR,
-    /**/           CORE_FILL_THL, CORE_FILL_TH, CORE_FILL_THR
+    /**/     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,   KC_NO,  KC_NO,  KC_NO,
+    KC_TRNS, KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,   HM_CTL, HM_SFT, KC_TRNS, KC_NO,
+    /**/     KC_TRNS, KC_TRNS, KC_TRNS, /**/     /**/     HM_ALT, HM_GUI, KC_NO,
+    /**/     /**/     /**/     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   )
 };
