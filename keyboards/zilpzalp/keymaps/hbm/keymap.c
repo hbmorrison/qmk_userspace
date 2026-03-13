@@ -29,10 +29,10 @@ bool handed_mods_is_left_key(keypos_t key) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT_zilpzalp(
-    /**/           CORE_BASE_TL,   CORE_BASE_IT, CORE_BASE_TR,
-    CORE_BASE_OML, HANDED_BASE_ML, CORE_BASE_IM, HANDED_BASE_MR, CORE_BASE_OMR,
-    /**/           CORE_BASE_BL,   /**/          CORE_BASE_BR,
-    /**/           CORE_BASE_THL,  CORE_BASE_TH, CORE_BASE_THR
+    /**/           CORE_BASE_TL,  CORE_BASE_IT, CORE_BASE_TR,
+    CORE_BASE_OML, CORE_BASE_ML,  CORE_BASE_IM, CORE_BASE_MR, CORE_BASE_OMR,
+    /**/           CORE_BASE_BL,  /**/          CORE_BASE_BR,
+    /**/           CORE_BASE_THL, CORE_BASE_TH, CORE_BASE_THR
   ),
   [LAYER_LEXT] = LAYOUT_zilpzalp(
     /**/           CORE_EXT_TL,  CORE_FILL_IT, CORE_FILL_TR,
@@ -113,15 +113,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /**/           CORE_FILL_THL, CORE_FILL_TH, CORE_FILL_THR
   ),
   [LAYER_LMOD] = LAYOUT_zilpzalp(
-    /**/           CORE_TRNS_TL,  CORE_TRNS_ITR, HANDED_MOD_TR,
-    CORE_TRNS_OML, CORE_TRNS_ML,  CORE_TRNS_IMR, HANDED_MOD_MR, HANDED_MOD_OMR,
-    /**/           CORE_TRNS_BL,  /**/           HANDED_MOD_BR,
+    /**/           CORE_TRNS_TL,  CORE_TRNS_ITR, CORE_MOD_TR,
+    CORE_TRNS_OML, CORE_TRNS_ML,  CORE_TRNS_IMR, CORE_MOD_MR,  CORE_MOD_OMR,
+    /**/           CORE_TRNS_BL,  /**/           CORE_MOD_BR,
     /**/           CORE_FILL_THL, CORE_FILL_TH,  CORE_FILL_THR
   ),
   [LAYER_RMOD] = LAYOUT_zilpzalp(
-    /**/            HANDED_MOD_TL, CORE_TRNS_ITL, CORE_TRNS_TR,
-    HANDED_MOD_OML, HANDED_MOD_ML, CORE_TRNS_IML, CORE_TRNS_MR, CORE_TRNS_OMR,
-    /**/            HANDED_MOD_BL, /**/           CORE_TRNS_BR,
-    /**/            CORE_FILL_THL, CORE_FILL_TH,  CORE_FILL_THR
+    /**/          CORE_MOD_TL,   CORE_TRNS_ITL, CORE_TRNS_TR,
+    CORE_MOD_OML, CORE_MOD_ML,   CORE_TRNS_IML, CORE_TRNS_MR, CORE_TRNS_OMR,
+    /**/          CORE_MOD_BL,   /**/           CORE_TRNS_BR,
+    /**/          CORE_FILL_THL, CORE_FILL_TH,  CORE_FILL_THR
   )
 };
