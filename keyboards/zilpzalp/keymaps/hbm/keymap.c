@@ -29,8 +29,8 @@ bool handed_mods_is_left_key(keypos_t key) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT_zilpzalp(
-    /**/           CORE_BASE_TL,  CORE_BASE_IT, CORE_BASE_TR,
-    CORE_BASE_OML, CORE_BASE_ML,  CORE_BASE_IM, CORE_BASE_MR, CORE_BASE_OMR,
+    /**/           CORE_BASE_TL,  CORE_BASE_IM, CORE_BASE_TR,
+    CORE_BASE_OML, CORE_BASE_ML,  CORE_BASE_IB, CORE_BASE_MR, CORE_BASE_OMR,
     /**/           CORE_BASE_BL,  /**/          CORE_BASE_BR,
     /**/           CORE_BASE_THL, CORE_BASE_TH, CORE_BASE_THR
   ),
